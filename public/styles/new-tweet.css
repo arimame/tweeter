@@ -1,6 +1,6 @@
 .new-tweet {
   background-color: #EEEEEE;
-  margin: 0 2em;
+  margin: 0 2em 2em 2em;
   border-radius: 5px;
   border: 1px solid #CCCCCC;
   padding: 10px;
@@ -20,4 +20,8 @@
   float: right;
   font-size: 0.75em;
   line-height: 2.5em;
+}
+
+.negative-numbers {
+  color: red;
 }

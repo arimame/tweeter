@@ -3,6 +3,8 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+$(document).ready(() => {
+
 
  const data = [
   {
@@ -60,22 +62,26 @@
 }
 
 function createTweetElement(data) {
-var $tweet = $("<article>").addClass("tweet");
- var timestamp = new Date(data.created_at);
- var todaysDate = new Date();
- var miliseconds = todaysDate.getTime() - timestamp.getTime();
- var finalDate;
- var year =  Math.ceil(miliseconds / (1000 * 60 * 60 * 24 * 365));
- var day = Math.ceil(miliseconds / (1000 * 60 * 60 * 24));
- var hour = Math.ceil(miliseconds / (1000 * 60 * 60));
- if (year > 0) {
-      finalDate = "About " + year + " years ago";
- } else if (day < 365) {
-      finalDate = day + " days ago";
- } else if (hour < 24) {
-    finalDate = hour + "hours ago";
- };
+  var $tweet = $("<article>").addClass("tweet");
 
+  //get years/days/hours ago
+  var timestamp = new Date(data.created_at);
+  var todaysDate = new Date();
+  var miliseconds = todaysDate.getTime() - timestamp.getTime();
+  var finalDate;
+  var year =  Math.ceil(miliseconds / (1000 * 60 * 60 * 24 * 365));
+  var day = Math.ceil(miliseconds / (1000 * 60 * 60 * 24));
+  var hour = Math.ceil(miliseconds / (1000 * 60 * 60));
+  if (year > 0) {
+    finalDate = "About " + year + " years ago";
+  } else if (day < 365) {
+    finalDate = day + " days ago";
+  } else if (hour < 24) {
+    finalDate = hour + "hours ago";
+  };
+
+
+//create tweet
   $tweet.append(`
           <header>
             <img class="logo" src=${data.user.avatars.small}>
@@ -96,7 +102,19 @@ var $tweet = $("<article>").addClass("tweet");
   return $tweet;
 }
 
+function loadTweets() {
+  $.get('/tweets'), function(data) {
+    console.log("data")
+  }
+}
+
 renderTweets(data);
+
+loadTweets();
+
+});
+
+
 
 
 

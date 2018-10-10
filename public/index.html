@@ -42,14 +42,17 @@
           <span class="counter">140</span>
           </form>
 
-           <script>
+<!--            <script>
             $( "form" ).on("submit", function( event ) {
             event.preventDefault();
-            console.log($( this).serialize());
-            $.post('/tweets', $(this).serialize());
+            var tweet = ($(this).serialize());
+            if (tweet === "" || tweet === null) {
+              alert("error")
+            } else {
+            $.post('/tweets', tweet);
             $('form').trigger("reset");
-
-        }); </script>
+}
+        }); </script> -->
 
       </section>
       <section id="tweet-container">

@@ -1,6 +1,6 @@
 article.tweet {
 
-  margin: 0 2em;
+  margin: 0 2em 2em 2em;
   border-radius: 5px;
   border: 1px solid #CCCCCC;
 
@@ -26,10 +26,11 @@ article.tweet h2 {
   color: #6A7D84;
 }
 
-article.tweet h5 {
+article.tweet header p {
   margin: 0;
   float: right;
   line-height: 3.5em;
+  font-size: 0.75em;
   color: #CCCCCC;
   font-weight: 300;
 }
@@ -59,6 +60,7 @@ article.tweet .icons .material-icons {
   display: none;
 }
 
+/*HOVER*/
 article.tweet:hover .icons .material-icons{
   display: inline-block;
   font-size: 1em;
@@ -78,7 +80,7 @@ article.tweet:hover h2 {
    color: #244751;
 }
 
-article.tweet:hover h5 {
+article.tweet:hover header p {
    color: #6A7D84;
 }
 

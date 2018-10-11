@@ -30,6 +30,9 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
+      <button id="compose">
+        <p><i class="material-icons">create</i>Compose</p>
+      </button>
     </nav>
 
     <!-- Page-specific (main) content here -->
@@ -41,6 +44,7 @@
           <input type="submit" value="Tweet">
           <span class="counter">140</span>
           </form>
+          <div class="error"><p>Error! Your tweet must be between 1 and 140 characters.</p></div>
       </section>
       <section id="tweet-container">
       </section>

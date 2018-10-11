@@ -5,11 +5,17 @@
  */
 $(document).ready(() => {
 
- function renderTweets(tweets) {
+
+$("#compose").click(function() {
+  $(".new-tweet").slideToggle();
+  $('textarea').focus();
+})
+
+function renderTweets(tweets) {
   $("#tweet-container").empty();
   tweets.forEach(function(element) {
-  var $tweet = createTweetElement(element);
-  $('#tweet-container').append($tweet);
+    var $tweet = createTweetElement(element);
+    $('#tweet-container').append($tweet);
   });
 }
 
@@ -25,7 +31,7 @@ function createTweetElement(data) {
   var day = Math.ceil(miliseconds / (1000 * 60 * 60 * 24));
   var hour = Math.ceil(miliseconds / (1000 * 60 * 60));
   if (year > 0) {
-    finalDate = "About " + year + " years ago";
+    finalDate = "About " + year + " years ago"; //1 year
   } else if (day < 365) {
     finalDate = day + " days ago";
   } else if (hour < 24) {
@@ -38,18 +44,16 @@ function createTweetElement(data) {
             <img class="logo" src=${data.user.avatars.small}>
             <h2>${data.user.name}</h2>
             <p>${data.user.handle}<p>
-          </header>
-          <p>${data.content.text}</p>
-          <footer>
+          </header>`
+          ).append($("<p>").text(data.content.text)).append( //cross site scripting
+            `<footer>
             <p>${finalDate}</p>
             <div class="icons">
             <i class="material-icons">flag</i>
             <i class="material-icons">repeat</i>
              <i class="material-icons">favorite</i>
-          </footer>
-        </article>`);
-
-
+          </footer>`
+            );
   return $tweet;
 }
 
@@ -60,7 +64,7 @@ function createTweetElement(data) {
    if (tweetLength === 0 || tweetLength > 140) {
       alert("Error! Your tweet must be between 1 and 140 characters.")
     } else {
-      var tweet = ($(this).serialize());
+      var tweet = $(this).serialize();
       $.post('/tweets', tweet).then(loadTweets);
       $('form').trigger("reset");
     }
@@ -68,11 +72,10 @@ function createTweetElement(data) {
 
 //GET TWEETS
 function loadTweets() {
-
   $.getJSON('/tweets', function(data) {
     data.sort(function(a, b) {
-    return b.created_at - a.created_at;
-});
+      return b.created_at - a.created_at;
+    });
     renderTweets(data);
   });
 }

@@ -37,6 +37,7 @@ article.tweet header p {
 
 article.tweet p {
   padding: 10px;
+  word-wrap: break-word;
 }
 
 article.tweet footer {

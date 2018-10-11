@@ -10,7 +10,6 @@ $("textarea").keyup(function(event) {
   } else {
     $counter.removeClass("negative-numbers");
   }
-  //console.log(count);
   $counter.text(count);
 
 })

@@ -11,6 +11,8 @@ $("#compose").click(function() {
   $('textarea').focus();
 })
 
+
+
 function renderTweets(tweets) {
   $("#tweet-container").empty();
   tweets.forEach(function(element) {
@@ -27,16 +29,21 @@ function createTweetElement(data) {
   var todaysDate = new Date();
   var miliseconds = todaysDate.getTime() - timestamp.getTime();
   var finalDate;
-  var year =  Math.ceil(miliseconds / (1000 * 60 * 60 * 24 * 365));
-  var day = Math.ceil(miliseconds / (1000 * 60 * 60 * 24));
-  var hour = Math.ceil(miliseconds / (1000 * 60 * 60));
+  var year =  Math.floor(miliseconds / (1000 * 60 * 60 * 24 * 365));
+  var day = Math.floor(miliseconds / (1000 * 60 * 60 * 24));
+  var hour = Math.floor(miliseconds / (1000 * 60 * 60));
+  var min = Math.floor(miliseconds / (1000 * 60 * 60));
   if (year > 0) {
     finalDate = "About " + year + " years ago"; //1 year
-  } else if (day < 365) {
+  } else if (day > 0 && day < 365) {
     finalDate = day + " days ago";
-  } else if (hour < 24) {
-    finalDate = hour + "hours ago";
-  };
+  } else if (hour > 0 && hour < 24) {
+    finalDate = hour + " hours ago";
+  } else if (min > 0 && min < 60) {
+    finalDate = min + " minutes ago";
+  } else {
+    finalDate = "less than a minute ago";
+  }
 
 //create tweet
   $tweet.append(`
@@ -61,9 +68,16 @@ function createTweetElement(data) {
   $( "form" ).on("submit", function( event ) {
     event.preventDefault();
     var tweetLength = $("textarea").val().length
-   if (tweetLength === 0 || tweetLength > 140) {
-      alert("Error! Your tweet must be between 1 and 140 characters.")
+   if (tweetLength === 0) {
+      $(".error").slideUp();
+      $(".error > p").text("Error! Your tweet must be at least one character.");
+      $(".error").slideDown();
+   } else if (tweetLength > 140) {
+      $(".error").slideUp();
+      $(".error > p").text("Error! Your tweet must be less than 140 characters.")
+      $(".error").slideDown();
     } else {
+      $(".error").slideUp();
       var tweet = $(this).serialize();
       $.post('/tweets', tweet).then(loadTweets);
       $('form').trigger("reset");

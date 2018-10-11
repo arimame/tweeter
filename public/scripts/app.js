@@ -6,13 +6,13 @@
 $(document).ready(() => {
 
 
+//COMPOSE TOGGLE
 $("#compose").click(function() {
   $(".new-tweet").slideToggle();
   $('textarea').focus();
 })
 
-
-
+//RENDER TWEETS
 function renderTweets(tweets) {
   $("#tweet-container").empty();
   tweets.forEach(function(element) {
@@ -21,6 +21,7 @@ function renderTweets(tweets) {
   });
 }
 
+//TAKES DATA and CREATES TWEETS
 function createTweetElement(data) {
   var $tweet = $("<article>").addClass("tweet");
 
@@ -66,7 +67,7 @@ function createTweetElement(data) {
     finalDate = "less than a minute ago";
   }
 
-//create tweet
+//CREATES HTML FOR TWEETS
   $tweet.append(`
           <header>
             <img class="logo" src=${data.user.avatars.small}>
@@ -88,14 +89,14 @@ function createTweetElement(data) {
 //POST TWEETS
   $( "form" ).on("submit", function( event ) {
     event.preventDefault();
-    var tweetLength = $("textarea").val().length
+    var tweetLength = $("textarea").val().length;
    if (tweetLength === 0) {
       $(".error").slideUp();
       $(".error > p").text("Error! Your tweet must be at least one character.");
       $(".error").slideDown();
    } else if (tweetLength > 140) {
       $(".error").slideUp();
-      $(".error > p").text("Error! Your tweet must be less than 140 characters.")
+      $(".error > p").text("Error! Your tweet must be less than 140 characters.");
       $(".error").slideDown();
     } else {
       $(".error").slideUp();

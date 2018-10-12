@@ -89,5 +89,21 @@ article.tweet:hover img {
 }
 
 
+ @media (min-width: 300px) and (max-width: 450px) {
+ article.tweet header{
+  height: 80px;
+  }
+
+  article.tweet header p {
+    text-align: left;
+    position: block;
+    width:100%;
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+  }
+}
+
+
 
 

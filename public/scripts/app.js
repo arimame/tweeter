@@ -72,7 +72,7 @@ function createTweetElement(data) {
           <header>
             <img class="logo" src=${data.user.avatars.small}>
             <h2>${data.user.name}</h2>
-            <p>${data.user.handle}<p>
+            <p>${data.user.handle}</p>
           </header>`
           ).append($("<p>").text(data.content.text)).append( //cross site scripting
             `<footer>
